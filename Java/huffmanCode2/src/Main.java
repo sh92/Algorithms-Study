@@ -10,11 +10,11 @@ public class Main {
     private PriorityQueue priorityQueue;
 
     public static void main(String[] args) {
-        new Main("data10.txt");
+        new Main("data10.txt");// hw01
         System.out.println();
         System.out.println("==================================================================================================");
         System.out.println();
-        new Main("data10_encoded.txt", "data10_table.txt");
+        new Main("data10_encoded.txt", "data10_table.txt");//hw02
     }
 
     public Main(String file, String table) {
@@ -36,33 +36,12 @@ public class Main {
             line = in.readLine();
 
             System.out.println();
-//            System.out.println("\n인코딩된 데이터 ");
-//            System.out.println(line);
-
             HuffmanTree tree = new HuffmanTree(root);
-//            tree.printTree();
             String decodedString = tree.decodeFromTree(line);
             writeStringToFile(decodedString,"hw08_01_201202160_decoded.txt");
             System.out.println("디코딩된 데이터");
             System.out.println(decodedString.toString());
 
-//            System.out.println("\n인코딩으로 부터 디코딩된 데이터 ");
-//            System.out.println(decodedString.toString());
-//            for (int i = 0; i < decodedString.length(); i++) {
-//                System.out.print(tree.encodeFromTree(decodedString.charAt(i)) + "|");
-//            }
-//            System.out.println("");
-//            System.out.println(decodedString);
-//            System.out.println("");
-//            System.out.println("\n인코딩된 데이터 ");
-//            System.out.println(line);
-//            System.out.println("인코딩된 것 다시 디코딩 ");
-//            StringBuffer encodingFromDecode = new StringBuffer();
-//            for (int i = 0; i < decodedString.length(); i++) {
-//                encodingFromDecode.append(tree.encodeFromTree(decodedString.charAt(i)));
-//            }
-//            System.out.println(encodingFromDecode.toString());
-//            System.out.println(line.equals(encodingFromDecode.toString()));
             in.close();
 
         } catch (IOException e) {
@@ -145,7 +124,7 @@ public class Main {
         priorityQueue.addTable(aphabetFrequencyTable);
         huffman = new HuffmanTree(priorityQueue);
 
-//        System.out.println("허프만 트리의 데이터 \n[알파벳:인코딩:빈도수]");
+        System.out.println("허프만 트리의 테이블 \n[알파벳,인코딩]");
         String txt = huffman.printTree();
         String fileName = "hw08_01_201202160_table.txt";
         writeStringToFile(txt, fileName);
@@ -163,11 +142,6 @@ public class Main {
         writeStringToFile(encodedStringData.toString(), "hw08_01_201202160_encoded.txt");
 
 
-//        System.out.println("\n인코딩 글자를 | 로 구분 ");
-//        System.out.println(encodedStringData2.toString());
-
-//        System.out.println("\n인코딩으로 부터 디코딩된 데이터 ");
-//        System.out.println(huffman.decodeFromTree(encodedStringData.toString()));
     }
 
     private void writeStringToFile(String txt, String fileName) {

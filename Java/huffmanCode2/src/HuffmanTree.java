@@ -169,7 +169,6 @@ public class HuffmanTree {
         if (_this != null) {
             printTreeRecursively(depth + 1, _this.left, buf);
             if (_this.alpha != '\0') {
-//                System.out.printf("[%s:%s:%d]\n", _this.alpha, encodeFromTree(_this.alpha), _this.count);
                 System.out.printf("%s,%s \n", _this.alpha, encodeFromTree(_this.alpha));
                 buf.append(_this.alpha + "," + encodeFromTree(_this.alpha) + "\n");
             }

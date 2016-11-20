@@ -43,29 +43,28 @@ public class Graph {
     public void prims(String _firstVertex) {
 
         int firstIndex = index(_firstVertex);
-        int u = firstIndex; //첫번째 인덱스를 방문인덱스로 설정
         Node u_node;
-
+        int u;
         Node[] key = new Node[size];
         for(int i=0;i<size;i++){
             key[i] = new Node(i,null,Integer.MAX_VALUE);
         }
 
-        key[u].setDist(0);
+        key[firstIndex].setDist(0);
 
         for(int i=0;i<size;i++){
             Q.insert(key[i]);
         }
-//       System.out.println("u(,"+vertexString[u]+")=0");
+
         int weigthSum=0;
         Node v_node;
+
         while (!Q.empty()) {
             u_node = Q.extract_min();
             u = u_node.getIndex();
             if (visited[u])
                 continue;
             visited[u] = true;
-            System.out.println("visit " + vertexString[u]);
             PriorityQueue backup = new HeapPriorityQueue(size);
             while(!Q.empty()){
                 v_node = Q.extract_min();
@@ -85,11 +84,15 @@ public class Graph {
             }
             Q = backup;
         }
+        System.out.println("w(,"+vertexString[firstIndex].toLowerCase()+")=0");
         for(int i =0;i<size;i++){
-            System.out.println(vertexString[i]+"-"+vertexString[key[i].getEdge()]+" : "+ key[i].getDist());
-            weigthSum+=key[i].getDist();
+            if(i!=firstIndex){
+                System.out.println("w<"+vertexString[i].toLowerCase()+","+vertexString[key[i].getEdge()].toLowerCase()+"> = "+ key[i].getDist());
+                weigthSum+=key[i].getDist();
+            }
         }
-        System.out.println("total sum : "+ weigthSum);
+        System.out.println();
+        System.out.println("w<MST> = "+ weigthSum);
     }
 
     private boolean notConnected(int u, int v) {
