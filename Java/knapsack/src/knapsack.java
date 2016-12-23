@@ -38,12 +38,6 @@ public class knapsack {
         int n=idx/3;
 
 
-      /*  for(int i =1;i<=n;i++){
-            System.out.print(item[i]+", ");
-            System.out.print(value[i]+", ");
-            System.out.println(weight[i]);
-        }*/
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("배낭의 크기를 입력하세요 (0~50) : ");
         int w =scanner.nextInt();
@@ -67,26 +61,19 @@ public class knapsack {
                         int t2=value[k]+bag[k-1][j-weight[k]];
                         bag[k][j]=Math.max(t1,t2);
                     }
-                    if(max < bag[k][j]){
-                        max = bag[k][j];
-                    }
                 }
             }
         }
+        max = findMax(n, w, bag);
+        printBag(n, w, bag);
+        printSelectedItem(value, n, w, bag, max, index, selectedItem);
 
-        for(int i=0;i<=n;i++){
-            for(int j=0;j<=w;j++){
-                System.out.printf("%3d",bag[i][j]);
-            }
-            System.out.println();
-        }
+    }
 
+    private void printSelectedItem(int[] value, int n, int w, int[][] bag, int max, int index, int[] selectedItem) {
         int remainValue = max;
-
-
         int nn=n;
         int ww=w;
-
         while(remainValue>0){
             while(nn>0){
                 nn--;
@@ -104,16 +91,26 @@ public class knapsack {
                 ww--;
             }
         }
-
-
-
-
-        System.out.println("max is "+max);
         System.out.print("Item :");
         int i;
         for( i=index-1;i>=0;i--){
             System.out.print(selectedItem[i]+" ");
         }
+    }
 
+    private void printBag(int n, int w, int[][] bag) {
+        for(int i=0;i<=n;i++){
+            for(int j=0;j<=w;j++){
+                System.out.printf("%3d",bag[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    private int findMax(int n, int w, int[][] bag) {
+        int max;
+        max = bag[n][w];
+        System.out.println("max is "+max);
+        return max;
     }
 }
